@@ -1,6 +1,6 @@
 workflows:
   default-workflow:
-    name: Install Maven and JDK Manually
+    name: Default Workflow
     scripts:
       - name: Install Java
         script: |
@@ -24,3 +24,12 @@ workflows:
         script: mvn test
     artifacts:
       - target/*.jar
+    triggers:
+      push:
+        branches:
+          include:
+            - main
+      pull_request:
+        branches:
+          include:
+            - "*"

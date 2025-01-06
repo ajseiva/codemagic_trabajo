@@ -2,7 +2,7 @@ workflows:
   flutter-workflow:
     name: Flutter Workflow
     environment:
-      flutter: stable
+      flutter: 3.7.0  # Cambia a la versión requerida
     scripts:
       - name: Install dependencies
         script: flutter pub get

@@ -8,7 +8,14 @@ workflows:
         script: flutter pub get
       - name: Run tests
         script: flutter test
-      - name: Build Android APK
+      - name: Build APK
         script: flutter build apk --release
-      - name: Build iOS IPA
+      - name: Build IPA
         script: flutter build ios --release
+    artifacts:
+      - build/**/outputs/**/*.apk
+      - build/**/outputs/**/*.ipa
+    publishing:
+      scripts:
+        - name: Publish to Firebase App Distribution
+          script: firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk

@@ -2,7 +2,7 @@ workflows:
   flutter-workflow:
     name: Flutter Workflow
     environment:
-      flutter: 3.7.0  # Cambia a la versión requerida
+      flutter: 3.10.0  # Reemplaza con la versión más reciente de Flutter compatible con Dart >= 3.7.0
     scripts:
       - name: Install dependencies
         script: flutter pub get

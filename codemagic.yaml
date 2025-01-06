@@ -2,7 +2,7 @@ workflows:
   flutter-workflow:
     name: Flutter Workflow
     environment:
-      flutter: stable # Alternatively, specify a specific version like "3.13.0"
+      flutter: stable
     scripts:
       - name: Install dependencies
         script: |

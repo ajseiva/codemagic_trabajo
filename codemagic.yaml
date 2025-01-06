@@ -1,6 +1,9 @@
 workflows:
   default-workflow:
     name: Install Maven and JDK Manually
+    triggers:
+      - push
+      - pull_request
     scripts:
       - name: Install Java
         script: |
@@ -19,12 +22,8 @@ workflows:
           export PATH=$MAVEN_HOME/bin:$PATH
           mvn -version
       - name: Build Project
-        script: |
-          cd my-project  # Cambia al directorio del proyecto
-          mvn clean package
+        script: mvn clean package
       - name: Run Tests
-        script: |
-          cd my-project  # Cambia al directorio del proyecto
-          mvn test
+        script: mvn test
     artifacts:
-      - my-project/target/*.jar
+      - target/*.jar

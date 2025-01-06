@@ -24,12 +24,3 @@ workflows:
         script: mvn test
     artifacts:
       - target/*.jar
-    triggers:
-      push:
-        branches:
-          include:
-            - main
-      pull_request:
-        branches:
-          include:
-            - "*"

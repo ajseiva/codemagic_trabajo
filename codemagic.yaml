@@ -1,12 +1,14 @@
 workflows:
   default-workflow:
-    name: Docker Workflow
+    name: Build Without Docker
     scripts:
-      - name: Pull Docker Image
-        script: docker pull alexrodri7/codemagic-local:latest
-      - name: Run Build in Docker
-        script: docker run -v $(pwd):/workspace -w /workspace alexrodri7/codemagic-local:latest mvn clean package
-      - name: Run Tests in Docker
-        script: docker run -v $(pwd):/workspace -w /workspace alexrodri7/codemagic-local:latest mvn test
+      - name: Set Up Environment
+        script: |
+          apt-get update
+          apt-get install -y openjdk-17-jdk maven
+      - name: Build Project
+        script: mvn clean package
+      - name: Run Tests
+        script: mvn test
     artifacts:
       - target/*.jar

@@ -1,9 +1,6 @@
 workflows:
   default-workflow:
     name: Install Maven and JDK Manually
-    triggers:
-      - push
-      - pull_request
     scripts:
       - name: Install Java
         script: |

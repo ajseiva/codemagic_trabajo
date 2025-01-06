@@ -1,5 +1,26 @@
-scripts:
-  - name: Check Installed Tools
-    script: |
-      java -version
-      mvn -version
+workflows:
+  default-workflow:
+    name: Install Maven and JDK Manually
+    scripts:
+      - name: Install Java
+        script: |
+          curl -LO https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
+          tar -xvf jdk-17_linux-x64_bin.tar.gz
+          mv jdk-17* $HOME/jdk
+          export JAVA_HOME=$HOME/jdk
+          export PATH=$JAVA_HOME/bin:$PATH
+          java -version
+      - name: Install Maven
+        script: |
+          curl -LO https://downloads.apache.org/maven/maven-3/3.9.5/binaries/apache-maven-3.9.5-bin.tar.gz
+          tar -xvf apache-maven-3.9.5-bin.tar.gz
+          mv apache-maven-3.9.5 $HOME/maven
+          export MAVEN_HOME=$HOME/maven
+          export PATH=$MAVEN_HOME/bin:$PATH
+          mvn -version
+      - name: Build Project
+        script: mvn clean package
+      - name: Run Tests
+        script: mvn test
+    artifacts:
+      - target/*.jar

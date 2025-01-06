@@ -19,8 +19,12 @@ workflows:
           export PATH=$MAVEN_HOME/bin:$PATH
           mvn -version
       - name: Build Project
-        script: mvn clean package
+        script: |
+          cd my-project  # Cambia al directorio del proyecto
+          mvn clean package
       - name: Run Tests
-        script: mvn test
+        script: |
+          cd my-project  # Cambia al directorio del proyecto
+          mvn test
     artifacts:
-      - target/*.jar
+      - my-project/target/*.jar

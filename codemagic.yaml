@@ -3,11 +3,11 @@ workflows:
     name: Docker Workflow
     environment:
       docker:
-        image: "alexrodri7/codemagic-local:latest"  # Imagen Docker personalizada
+        image: alexrodri7/codemagic-local:latest
     scripts:
       - name: Build Project
         script: mvn clean package
       - name: Run Tests
         script: mvn test
     artifacts:
-      - target/*.jar  # Especifica los artefactos que se generarán
+      - target/*.jar

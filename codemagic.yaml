@@ -4,27 +4,11 @@ workflows:
     environment:
       flutter: stable
     scripts:
-      # Instala dependencias
       - name: Install dependencies
-        script: |
-          flutter pub get
-      # Ejecuta pruebas
+        script: flutter pub get
       - name: Run tests
-        script: |
-          flutter test
-      # Compila la aplicación para Android
+        script: flutter test
       - name: Build Android APK
-        script: |
-          flutter build apk --release
-      # Compila la aplicación para iOS
+        script: flutter build apk --release
       - name: Build iOS IPA
-        script: |
-          flutter build ios --release
-    artifacts:
-      - build/**/outputs/**/*.apk
-      - build/**/outputs/**/*.ipa
-    publishing:
-      scripts:
-        - name: Publish to Firebase App Distribution
-          script: |
-            firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk
+        script: flutter build ios --release

@@ -1,13 +1,12 @@
 workflows:
   default-workflow:
     name: Docker Workflow
-    environment:
-      docker:
-        image: alexrodri7/codemagic-local:latest
     scripts:
-      - name: Build Project
-        script: mvn clean package
-      - name: Run Tests
-        script: mvn test
+      - name: Pull Docker Image
+        script: docker pull alexrodri7/codemagic-local:latest
+      - name: Run Build in Docker
+        script: docker run -v $(pwd):/workspace -w /workspace alexrodri7/codemagic-local:latest mvn clean package
+      - name: Run Tests in Docker
+        script: docker run -v $(pwd):/workspace -w /workspace alexrodri7/codemagic-local:latest mvn test
     artifacts:
       - target/*.jar

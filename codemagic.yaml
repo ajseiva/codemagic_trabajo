@@ -1,0 +1,30 @@
+workflows:
+  flutter-workflow:
+    name: Flutter CI/CD Pipeline
+    environment:
+      flutter: stable
+    scripts:
+      # Instala dependencias
+      - name: Install dependencies
+        script: |
+          flutter pub get
+      # Ejecuta pruebas
+      - name: Run tests
+        script: |
+          flutter test
+      # Compila la aplicación para Android
+      - name: Build Android APK
+        script: |
+          flutter build apk --release
+      # Compila la aplicación para iOS
+      - name: Build iOS IPA
+        script: |
+          flutter build ios --release
+    artifacts:
+      - build/**/outputs/**/*.apk
+      - build/**/outputs/**/*.ipa
+    publishing:
+      scripts:
+        - name: Publish to Firebase App Distribution
+          script: |
+            firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk
